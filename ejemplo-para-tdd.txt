@@ -1,0 +1,36 @@
+Tests
+
+@Test
+    void testDivisionNormal() {
+        double resultado = Calculadora.dividir(10, 2);
+        assertEquals(5, resultado);
+    }
+
+@Test
+    void testDivisionPorCero() {
+     	assertThrows(IllegalArgumentException.class, () -> Calculadora.dividir(10, 0));
+    }
+
+
+
+Desarrollo sin refactor
+
+public static double dividir(double a, double b) {
+        if (b == 0) {
+            throw new IllegalArgumentException("No se puede dividir por cero");
+        }
+        return a / b;
+    }
+
+
+Desarrollo con refactor:
+
+public static double dividir(double a, double b) {
+        validarDivisor(b);
+        return a / b;
+    }
+
+    private void validarDivisor(double divisor) {
+        if (divisor == 0)
+            throw new IllegalArgumentException("No se puede dividir por cero");
+    }
